@@ -14,6 +14,7 @@ antigen bundle git
 antigen bundle sudo
 antigen bundle pip
 antigen bundle command-not-found
+antigen bundle yarn
 
 # Load plugins from other repos
 antigen bundle zsh-users/zsh-completions
@@ -27,6 +28,7 @@ antigen theme romkatv/powerlevel10k
 # Save and apply all changes
 antigen apply
 
+
 # Aliases
 alias sl='ls'
 alias la='ls -A'
@@ -34,6 +36,22 @@ alias la='ls -A'
 if [ -x "$(command -v colorls)" ]; then
   alias lc='colorls'
 fi
+
+if [ "$XDG_CURRENT_DESKTOP" == "KDE" ] then
+  alias kdelogout='qdbus org.kde.ksmserver /KSMServer logout 1 3 3'
+fi
+
+# Set brightness of external monitor
+if [ -x "$(command -v ddcutil)" ]; then
+  alias bright="sudo ddcutil setvcp 10"
+fi
+
+
+# Auto rehash after pacman package has been installed
+TRAPUSR1() { rehash }
+
+# Let yay use multiple cores to compile
+export MAKEFLAGS="-j$(nproc)"
 
 # Syntax highlighting for man
 if [ -x "$(command -v batcat)" ]; then
@@ -44,8 +62,16 @@ elif [ -x "$(command -v bat)" ]; then
   export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 fi
 
-# Load p10k config
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# Load p10k config, fallback to basic font in non-primary terminal
+terminal_emulator=$(ps -p $(ps -p $$ -o ppid=) -o args=);
+case $terminal_emulator in
+    *konsole*)
+        [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+        ;;
+    *)
+        [[ ! -f ~/.p10k.alt.zsh ]] || source ~/.p10k.alt.zsh
+        ;;
+esac
 
 # Load nvm
 export NVM_DIR="$HOME/.nvm"
