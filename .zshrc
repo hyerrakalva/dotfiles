@@ -37,7 +37,8 @@ if [ -x "$(command -v colorls)" ]; then
   alias lc='colorls'
 fi
 
-if [ "$XDG_CURRENT_DESKTOP" == "KDE" ] then
+# Command to logout of KDE desktop
+if [ "$XDG_CURRENT_DESKTOP" = "KDE" ]; then
   alias kdelogout='qdbus org.kde.ksmserver /KSMServer logout 1 3 3'
 fi
 
@@ -62,10 +63,20 @@ elif [ -x "$(command -v bat)" ]; then
   export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 fi
 
+# If in WSL, export environment variables for X forwarding
+if [[ -v WSL_DISTRO_NAME ]]; then
+  export DISPLAY=$(ip route list default | awk '{print $3}'):0
+  export LIBGL_ALWAYS_INDIRECT=1
+fi
+
 # Load p10k config, fallback to basic font in non-primary terminal
-terminal_emulator=$(ps -p $(ps -p $$ -o ppid=) -o args=);
+if [[ -v WT_SESSION ]]; then
+  terminal_emulator="wt"
+else
+  terminal_emulator=$(ps -p $(ps -p $$ -o ppid=) -o args=);
+fi
 case $terminal_emulator in
-    *konsole*)
+    *konsole* | wt)
         [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
         ;;
     *)
@@ -74,5 +85,11 @@ case $terminal_emulator in
 esac
 
 # Load nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" 
+if [ -s /usr/share/nvm/init-nvm.sh ]; then
+  # If nvm was installed via AUR
+  source /usr/share/nvm/init-nvm.sh
+else
+  # If nvm was installed via script
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+fi
