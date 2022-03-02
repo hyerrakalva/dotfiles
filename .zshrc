@@ -3,8 +3,13 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Load antigen
-source $HOME/.antigen.zsh
+# Load antigen, download if needed
+ANTIGEN_PATH=$HOME/.antigen.zsh
+if [ ! -f "$ANTIGEN_PATH" ]; then
+  echo "Downloading antigen..."
+  curl -L git.io/antigen > $ANTIGEN_PATH
+fi
+source $ANTIGEN_PATH
 
 # Load the oh-my-zsh library
 antigen use oh-my-zsh
