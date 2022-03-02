@@ -179,8 +179,24 @@
 
   #################################[ os_icon: os identifier ]##################################
   # OS identifier color.
+  if [[ -r /etc/os-release ]]; then
+    local lines=(${(f)"$(</etc/os-release)"})
+    lines=(${(@M)lines:#ID=*})
+    (( $#lines == 1 )) && os_release_id=${lines[1]#ID=}
+  fi
+  case $os_release_id in
+    *arch*)
+      typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=32
+      ;;
+    *ubuntu*)
+      typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=9
+      ;;
+    *)
+      typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=232
+      ;;
+  esac
   #typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=32 (use this for arch)
-  typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=232
+  #typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=232
   typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND=15
   # Custom icon.
   # typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION='⭐'
@@ -497,14 +513,14 @@
   typeset -g POWERLEVEL9K_STATUS_OK=true
   typeset -g POWERLEVEL9K_STATUS_OK_VISUAL_IDENTIFIER_EXPANSION='✔'
   typeset -g POWERLEVEL9K_STATUS_OK_FOREGROUND=2
-  typeset -g POWERLEVEL9K_STATUS_OK_BACKGROUND=234
+  typeset -g POWERLEVEL9K_STATUS_OK_BACKGROUND=0
 
   # Status when some part of a pipe command fails but the overall exit status is zero. It may look
   # like this: 1|0.
   typeset -g POWERLEVEL9K_STATUS_OK_PIPE=true
   typeset -g POWERLEVEL9K_STATUS_OK_PIPE_VISUAL_IDENTIFIER_EXPANSION='✔'
   typeset -g POWERLEVEL9K_STATUS_OK_PIPE_FOREGROUND=2
-  typeset -g POWERLEVEL9K_STATUS_OK_PIPE_BACKGROUND=234
+  typeset -g POWERLEVEL9K_STATUS_OK_PIPE_BACKGROUND=0
 
   # Status when it's just an error code (e.g., '1'). No need to show it if prompt_char is enabled as
   # it will signify error by turning red.
