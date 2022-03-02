@@ -54,6 +54,9 @@ TRAPUSR1() { rehash }
 # Let yay use multiple cores to compile
 export MAKEFLAGS="-j$(nproc)"
 
+# Explanation not really needed
+export EDITOR=vim
+
 # Syntax highlighting for man
 if [ -x "$(command -v batcat)" ]; then
   export BAT_THEME=Coldark-Dark
@@ -67,6 +70,9 @@ fi
 if [[ -v WSL_DISTRO_NAME ]]; then
   export DISPLAY=$(ip route list default | awk '{print $3}'):0
   export LIBGL_ALWAYS_INDIRECT=1
+  
+  # 2x scaling for hidpi displays
+  export GDK_SCALE=2
 fi
 
 # Load p10k config, fallback to basic font in non-primary terminal
