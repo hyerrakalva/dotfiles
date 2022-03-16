@@ -26,6 +26,7 @@ antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle esc/conda-zsh-completion
+antigen bundle lukechilds/zsh-nvm
 
 # Load the theme
 antigen theme romkatv/powerlevel10k
@@ -80,7 +81,8 @@ if [[ -v WSL_DISTRO_NAME ]]; then
   export GDK_SCALE=2
 fi
 
-# Load p10k config, fallback to basic font in non-primary terminal
+# Check if current terminal is capable of using nerd fonts,
+# then load p10k config and set ls aliases accordingly
 if [[ -v WT_SESSION ]]; then
   terminal_emulator="wt"
 else
@@ -88,19 +90,12 @@ else
 fi
 case $terminal_emulator in
     *konsole* | wt)
+    	if [ -x "$(command -v lsd)" ]; then
+  	  alias ls='lsd'
+        fi
         [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
         ;;
     *)
         [[ ! -f ~/.p10k.alt.zsh ]] || source ~/.p10k.alt.zsh
         ;;
 esac
-
-# Load nvm
-if [ -s /usr/share/nvm/init-nvm.sh ]; then
-  # If nvm was installed via AUR
-  source /usr/share/nvm/init-nvm.sh
-else
-  # If nvm was installed via script
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-fi
