@@ -20,6 +20,8 @@ antigen bundle sudo
 antigen bundle pip
 antigen bundle command-not-found
 antigen bundle yarn
+antigen bundle web-search
+antigen bundle copybuffer
 
 # Load plugins from other repos
 antigen bundle zsh-users/zsh-completions
@@ -38,6 +40,7 @@ antigen apply
 # Aliases
 alias sl='ls'
 alias la='ls -A'
+
 
 if [ -x "$(command -v colorls)" ]; then
   alias lc='colorls'
