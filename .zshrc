@@ -28,6 +28,7 @@ antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle esc/conda-zsh-completion
+antigen bundle paulirish/git-open
 antigen bundle lukechilds/zsh-nvm
 
 # Load the theme
@@ -99,6 +100,9 @@ case $terminal_emulator in
         [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
         ;;
     *)
+        if [ -x "$(command -v lsd)" ]; then
+          alias ls='lsd --icon=never'
+        fi
         [[ ! -f ~/.p10k.alt.zsh ]] || source ~/.p10k.alt.zsh
         ;;
 esac
