@@ -19,6 +19,7 @@ Plug 'frazrepo/vim-rainbow'
 Plug 'https://tpope.io/vim/surround.git'
 Plug 'https://github.com/airblade/vim-gitgutter.git'
 Plug 'https://github.com/tpope/vim-sleuth'
+Plug 'https://github.com/farmergreg/vim-lastplace.git'
 Plug 'https://github.com/jnurmine/Zenburn.git'
 
 " Initialize plugin system
