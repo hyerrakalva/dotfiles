@@ -71,6 +71,7 @@ export EDITOR=vim
 if [ -x "$(command -v batcat)" ]; then
   export BAT_THEME=Coldark-Dark
   export MANPAGER="sh -c 'col -bx | batcat -l man -p'"
+  alias bat='batcat'
 elif [ -x "$(command -v bat)" ]; then
   export BAT_THEME=Coldark-Dark
   export MANPAGER="sh -c 'col -bx | bat -l man -p'"
