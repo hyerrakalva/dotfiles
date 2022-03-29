@@ -77,8 +77,9 @@ elif [ -x "$(command -v bat)" ]; then
   export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 fi
 
-# If in WSL, export environment variables for X forwarding
-if [[ -v WSL_DISTRO_NAME ]]; then
+# If in WSL, export environment variables for X forwarding,
+# given that WSLg is not enabled on Windows 11
+if [[ -v WSL_DISTRO_NAME ]] && [[ ! -v DISPLAY ]]; then
   export DISPLAY=$(ip route list default | awk '{print $3}'):0
   export LIBGL_ALWAYS_INDIRECT=1
   
