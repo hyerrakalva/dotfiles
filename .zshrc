@@ -88,7 +88,7 @@ if [[ -v WSL_DISTRO_NAME ]] && [[ ! -v DISPLAY ]]; then
 fi
 
 # Check if current terminal is capable of using nerd fonts,
-# then load p10k config and set ls aliases accordingly
+# then load p10k config and set some aliases & vars accordingly
 if [[ -v WT_SESSION ]]; then
   terminal_emulator="wt"
 else
@@ -99,6 +99,7 @@ case $terminal_emulator in
     	if [ -x "$(command -v lsd)" ]; then
   	  alias ls='lsd'
         fi
+        export SUDO_PROMPT=$'[sudo] password for %p \033[01;33m\Uf80a\033[00m: '
         [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
         ;;
     *)
