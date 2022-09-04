@@ -87,6 +87,12 @@ if [[ -v WSL_DISTRO_NAME ]] && [[ ! -v DISPLAY ]]; then
   export GDK_SCALE=2
 fi
 
+# Check if in WSL
+if [[ -v WSL_DISTRO_NAME ]]; then
+  # Add option to remove Windows directories from PATH if file system is getting too slow
+  alias rm_mnt="PATH=$(echo $PATH | sed s/:/\\n/g | grep -v '/mnt/c' | sed ':a;N;$!ba;s/\n/:/g')"
+fi
+
 # Check if current terminal is capable of using nerd fonts,
 # then load p10k config and set some aliases & vars accordingly
 if [[ -v WT_SESSION ]]; then
