@@ -41,6 +41,7 @@ antigen apply
 # Aliases
 alias sl='ls'
 alias la='ls -A'
+alias path='echo "$PATH" | tr ":" "\n" | nl'
 
 
 if [ -x "$(command -v colorls)" ]; then
