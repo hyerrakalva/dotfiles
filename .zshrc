@@ -30,6 +30,8 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle esc/conda-zsh-completion
 antigen bundle paulirish/git-open
 antigen bundle lukechilds/zsh-nvm
+antigen bundle MichaelAquilina/zsh-autoswitch-virtualenv
+antigen bundle MichaelAquilina/zsh-you-should-use
 
 # Load the theme
 antigen theme romkatv/powerlevel10k
@@ -67,6 +69,9 @@ export MAKEFLAGS="-j$(nproc)"
 
 # Explanation not really needed
 export EDITOR=vim
+
+# Have zsh virtualenv plugin create venvs in project directory
+export AUTOSWITCH_VIRTUAL_ENV_DIR="venv"
 
 # Syntax highlighting for man
 if [ -x "$(command -v batcat)" ]; then
