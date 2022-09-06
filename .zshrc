@@ -73,6 +73,9 @@ export EDITOR=vim
 # Have zsh virtualenv plugin create venvs in project directory
 export AUTOSWITCH_VIRTUAL_ENV_DIR="venv"
 
+# Ignore alias suggestions for git command
+export YSU_IGNORED_ALIASES=("g")
+
 # Syntax highlighting for man
 if [ -x "$(command -v batcat)" ]; then
   export BAT_THEME=Coldark-Dark
