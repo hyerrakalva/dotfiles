@@ -96,7 +96,7 @@ fi
 # Check if in WSL
 if [[ -v WSL_DISTRO_NAME ]]; then
   # Add option to remove Windows directories from PATH if file system is getting too slow
-  alias rm_mnt="PATH=$(echo $PATH | sed s/:/\\n/g | grep -v '/mnt/c' | sed ':a;N;$!ba;s/\n/:/g')"
+  rm_mnt () { PATH=$(echo $PATH | sed s/:/\\n/g | grep -v '/mnt/c' | sed ':a;N;$!ba;s/\n/:/g'); }
 fi
 
 # Check if current terminal is capable of using nerd fonts,
