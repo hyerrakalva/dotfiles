@@ -44,6 +44,8 @@ antigen apply
 alias sl='ls'
 alias la='ls -A'
 alias path='echo "$PATH" | tr ":" "\n" | nl'
+alias glg='git log --stat --date=local'
+alias ggpush='git push -u origin "$(git_current_branch)"'
 
 
 if [ -x "$(command -v colorls)" ]; then
