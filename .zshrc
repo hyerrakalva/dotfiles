@@ -43,6 +43,7 @@ antigen apply
 # Aliases
 alias sl='ls'
 alias la='ls -A'
+alias open='open_command'
 alias path='echo "$PATH" | tr ":" "\n" | nl'
 alias glg='git log --stat --date=local'
 alias ggpush='git push -u origin "$(git_current_branch)"'
