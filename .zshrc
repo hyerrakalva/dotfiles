@@ -63,6 +63,10 @@ if [ -x "$(command -v ddcutil)" ]; then
   alias bright="sudo ddcutil setvcp 10"
 fi
 
+# Pretty-print json in pager
+if [ -x "$(command -v jq)" ]; then
+  alias json="jq -C | less -R"
+fi
 
 # Auto rehash after pacman package has been installed
 TRAPUSR1() { rehash }
@@ -75,6 +79,9 @@ export EDITOR=vim
 
 # Have zsh virtualenv plugin create venvs in project directory
 export AUTOSWITCH_VIRTUAL_ENV_DIR="venv"
+
+# Case insensitive searching in less
+export LESS="-i"
 
 # Ignore alias suggestions for git command
 export YSU_IGNORED_ALIASES=("g")
