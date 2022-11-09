@@ -81,7 +81,7 @@ export EDITOR=vim
 export AUTOSWITCH_VIRTUAL_ENV_DIR="venv"
 
 # Case insensitive searching in less
-export LESS="-i"
+export LESS="-i -R"
 
 # Ignore alias suggestions for git command
 export YSU_IGNORED_ALIASES=("g")
