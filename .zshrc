@@ -84,7 +84,7 @@ export AUTOSWITCH_VIRTUAL_ENV_DIR="venv"
 export LESS="-i -R"
 
 # Ignore alias suggestions for git command
-export YSU_IGNORED_ALIASES=("g")
+export YSU_IGNORED_ALIASES=("g" "y")
 
 # Syntax highlighting for man
 if [ -x "$(command -v batcat)" ]; then
