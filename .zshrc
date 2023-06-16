@@ -96,6 +96,11 @@ elif [ -x "$(command -v bat)" ]; then
   export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 fi
 
+# Enable Github Copilot CLI if installed
+if [ -x "$(command -v github-copilot-cli)" ]; then
+  eval "$(github-copilot-cli alias -- "$0")"
+fi
+
 # If in WSL, export environment variables for X forwarding,
 # given that WSLg is not enabled on Windows 11
 if [[ -v WSL_DISTRO_NAME ]] && [[ ! -v DISPLAY ]]; then
