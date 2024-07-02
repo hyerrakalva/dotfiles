@@ -27,7 +27,6 @@ antigen bundle copybuffer
 antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle esc/conda-zsh-completion
 antigen bundle paulirish/git-open
 antigen bundle lukechilds/zsh-nvm
 antigen bundle MichaelAquilina/zsh-autoswitch-virtualenv
